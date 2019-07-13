@@ -60,5 +60,8 @@ typings/
 # next.js build output
 .next
 
-ignore.js
-Discord/api.js
+
+
+Discord/config/discordToken.js
+
+Discord/config/youtube.js
