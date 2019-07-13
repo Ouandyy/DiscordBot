@@ -61,4 +61,4 @@ typings/
 .next
 
 ignore.js
-Discord/ignore.js
+Discord/api.js
