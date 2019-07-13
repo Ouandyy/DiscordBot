@@ -65,3 +65,5 @@ typings/
 Discord/config/discordToken.js
 
 Discord/config/youtube.js
+
+Discord/config
