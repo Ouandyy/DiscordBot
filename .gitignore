@@ -67,3 +67,5 @@ Discord/config/discordToken.js
 Discord/config/youtubeKey.js
 
 Discord/config
+
+.env
