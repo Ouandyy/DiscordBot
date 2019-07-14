@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
-const discordToken = require('./config/discordToken.js');
+    //uncomment for local
+// const discordToken = require('./config/discordToken.js');
 const musicStorage = require('./musicStorage');
     //contains .recorder which is a method
     //contains .playlist which is array of user input
@@ -30,5 +31,5 @@ bot.on('guildMemberAdd', member => {
 });
 
 
-    //bot login
+    //bot login for heroku
 bot.login(process.env.DISCORD_API);
