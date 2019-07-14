@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
-const discordToken = require('./config/discordToken.js');
+// const discordToken = require('./config/discordToken.js');
 const musicStorage = require('./musicStorage');
     //contains .recorder which is a method
     //contains .playlist which is array of user input
