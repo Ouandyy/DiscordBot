@@ -5,6 +5,4 @@ const recorder = (info) => {
 }
 
 
-console.log(playList);
-
 module.exports = { recorder, playList };
