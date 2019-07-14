@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
-    //uncomment for local
 // const discordToken = require('./config/discordToken.js');
 const musicStorage = require('./musicStorage');
     //contains .recorder which is a method
