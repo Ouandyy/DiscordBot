@@ -36,4 +36,4 @@ bot.login(process.env.DISCORD_API);
 
 //uncomment for local build
 // const discordToken = require('./config/discordToken.js');
-// bot.login(discordToken);
+// bot.login(discordToken); 
