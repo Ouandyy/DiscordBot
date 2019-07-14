@@ -31,4 +31,4 @@ bot.on('guildMemberAdd', member => {
 
 
     //bot login
-bot.login(discordToken);
+bot.login(process.env.DISCORD_API);
