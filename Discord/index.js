@@ -16,8 +16,8 @@ bot.on('ready', () => {
 
     // This records what comes after !
 bot.on('message', msg => {
-    if (msg.content[0] === '!') {
-        msg.channel.send(msg.content.slice(1)); 
+    if (msg.content.slice(0,6) === '!!play') {
+        msg.channel.send('now playing'); 
         musicStorage.recorder(msg.content.slice(1));
     }
 });
