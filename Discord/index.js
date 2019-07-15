@@ -26,11 +26,12 @@ const play = (connection, message) => {
   
    musicStorage.playList.shift();
   
-    if (musicStorage[0]) {
-      play(connection, musicStorage[0])
-    }else {
-      connection.disconnect();
-    }
+    // if (musicStorage[0]) {
+    //   play(connection, musicStorage[0])
+    // }
+    // else {
+    //   connection.disconnect();
+    // }
 
 }
 
@@ -82,16 +83,16 @@ bot.on('message', msg => {
   }
 });
 
-bot.on('message', msg => {
-  const user = msg.member.user.username
-  if (user === 'SQUINTZ') {
-    msg.channel.send('stfu Jordan')
-  } else if (user === 'Bl4ckB4ron') {
-    msg.channel.send('stfu Andy')
-  } else if (user === 'Virus') {
-    msg.channel.send('stfu Jimmy')
-  }
-});
+// bot.on('message', msg => {
+//   const user = msg.member.user.username
+//   if (user === 'SQUINTZ') {
+//     msg.channel.send('stfu Jordan')
+//   } else if (user === 'Bl4ckB4ron') {
+//     msg.channel.send('stfu Andy')
+//   } else if (user === 'Virus') {
+//     msg.channel.send('stfu Jimmy')
+//   }
+// });
 
 
 // Welcome greetings
@@ -104,8 +105,8 @@ bot.on('guildMemberAdd', member => {
 
 
 // bot login for heroku
-// bot.login(process.env.DISCORD_API);
+bot.login(process.env.DISCORD_API)
 
 // uncomment for local build and test
-const discordToken = require('./config/discordToken.js');
-bot.login(discordToken); 
+// const discordToken = require('./config/discordToken.js');
+// bot.login(discordToken); 
