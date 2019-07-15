@@ -105,8 +105,8 @@ bot.on('guildMemberAdd', member => {
 
 
 // bot login for heroku
-// bot.login(process.env.DISCORD_API);
+bot.login(process.env.DISCORD_API)
 
 // uncomment for local build and test
-const discordToken = require('./config/discordToken.js');
-bot.login(discordToken); 
+// const discordToken = require('./config/discordToken.js');
+// bot.login(discordToken); 
