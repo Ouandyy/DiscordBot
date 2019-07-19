@@ -1,15 +1,22 @@
+const Commando = require('discord.js-commando');
 const Discord = require('discord.js');
-const bot = new Discord.Client();
 const coinflip = require('./coinflip');
 const rolldice = require('./rolldice');
 const YTDL = require('ytdl-core');
-
+const settings = require('config/settings.json');
 const musicStorage = require('./musicStorage');
-//contains .recorder which is a method
-//contains .playlist which is array of user input
 const greeting = require('./greeting.js')
-// random greeting gen
 
+// Commando is a framework of discord.js to allow for easeir command manipulation
+const client = global.client = new Commando.Client({
+  commandPrefix: settings.prefix
+});
+
+// Commando Login: Replacing regular discord.js
+client.login(process.env.DISCORD_API)
+
+// Will switch up discord.js for Discord functionality (editing messages) versus using it as a bot lien
+const bot = new Discord.Client();
 
 //shows that bot is online through console
 bot.on('ready', () => {
@@ -105,7 +112,7 @@ bot.on('guildMemberAdd', member => {
 
 
 // bot login for heroku
-bot.login(process.env.DISCORD_API)
+// bot.login(process.env.DISCORD_API)
 
 // uncomment for local build and test
 // const discordToken = require('./config/discordToken.js');

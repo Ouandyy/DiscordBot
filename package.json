@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Ouandyy/DiscordBot#readme",
   "dependencies": {
     "discord.js": "^11.5.1",
+    "discord.js-commando": "^0.10.0",
     "ffmpeg-binaries": "^4.0.0",
     "nodemon": "^1.19.1",
     "opusscript": "0.0.6",
