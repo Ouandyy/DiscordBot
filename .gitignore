@@ -60,12 +60,4 @@ typings/
 # next.js build output
 .next
 
-
-
-Discord/config/discordToken.js
-
-Discord/config/youtubeKey.js
-
-Discord/config
-
 .env

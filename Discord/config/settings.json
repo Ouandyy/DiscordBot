@@ -1,0 +1,10 @@
+// Settings.json will hold the general settings the the bot.
+{
+    "prefix": "!",  // Allows to change the prefix of the commands
+    "greetings": "true",    // Greet new members
+    "modules": {
+        "music": "true",    // Turn music bot on/off
+        "coinflip": "true" // Turn coin flip game on/off
+    }
+    
+}
