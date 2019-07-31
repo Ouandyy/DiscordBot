@@ -1,9 +1,10 @@
+require('dotenv').config() // Allows you to use local .env to test bot
 const Commando = require('discord.js-commando');
 const Discord = require('discord.js');
 const coinflip = require('./coinflip');
 const rolldice = require('./rolldice');
 const YTDL = require('ytdl-core');
-const settings = require('config/settings.json');
+const settings = require('./config/settings.json');
 const musicStorage = require('./musicStorage');
 const greeting = require('./greeting.js')
 
@@ -12,6 +13,7 @@ const client = global.client = new Commando.Client({
   commandPrefix: settings.prefix
 });
 
+tokentest = process.env.DISCORD_API
 // Commando Login: Replacing regular discord.js
 client.login(process.env.DISCORD_API)
 
@@ -22,6 +24,15 @@ const bot = new Discord.Client();
 bot.on('ready', () => {
   console.log(`Logged in as ${bot.user.tag}!`);
 });
+
+// Registering created commands into groups. Allows enabling/disabling of commands.
+client.registry
+  .registerDefaultTypes()
+  .registerGroups([
+    ['administration','Administration'],
+    ['music','Music'],
+    ['fun','Fun']
+  ])
 
 
 
