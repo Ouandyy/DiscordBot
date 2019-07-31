@@ -1,6 +1,6 @@
 require('dotenv').config() // Allows you to use local .env to test bot
+const path = require('path');
 const Commando = require('discord.js-commando');
-const Discord = require('discord.js');
 const coinflip = require('./coinflip');
 const rolldice = require('./rolldice');
 const YTDL = require('ytdl-core');
@@ -17,12 +17,9 @@ tokentest = process.env.DISCORD_API
 // Commando Login: Replacing regular discord.js
 client.login(process.env.DISCORD_API)
 
-// Will switch up discord.js for Discord functionality (editing messages) versus using it as a bot lien
-const bot = new Discord.Client();
-
 //shows that bot is online through console
-bot.on('ready', () => {
-  console.log(`Logged in as ${bot.user.tag}!`);
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
 });
 
 // Registering created commands into groups. Allows enabling/disabling of commands.
@@ -33,6 +30,15 @@ client.registry
     ['music','Music'],
     ['fun','Fun']
   ])
+  .registerCommandsIn(path.join(__dirname,'commands'))
+
+  // Add Inhibitor: Allows the dispersion of commands in registry.
+  client.dispatcher.addInhibitor(msg => {
+    if (msg.channel.channel.type !== 'text') {
+      msg.reply('Please place command in text channel')
+        .then(() => console.log(`Sent a reply to ${msg.author.username}`))
+    }
+  })
 
 
 
@@ -54,7 +60,7 @@ const play = (connection, message) => {
 }
 
 
-bot.on('message', msg => {
+client.on('message', msg => {
   if (msg.content.slice(0, 6) === '!!play') {
     const musicInput = msg.content.split(' ')[1];
     const voiceChannel = msg.member.voiceChannel;
@@ -89,13 +95,13 @@ bot.on('message', msg => {
 
 
 
-bot.on('message', msg => {
+client.on('message', msg => {
   if (msg.content === '!!flipcoin') {
     msg.channel.send(coinflip());
   }
 });
 
-bot.on('message', msg => {
+client.on('message', msg => {
   if (msg.content === '!!rolldice') {
     msg.channel.send(rolldice());
   }
@@ -114,7 +120,7 @@ bot.on('message', msg => {
 
 
 // Welcome greetings
-bot.on('guildMemberAdd', member => {
+client.on('guildMemberAdd', member => {
   const channel = member.guild.channels.find(ch => ch.name === 'welcome');
   if (!channel) return;
   channel.send(`Welcome to ${member.guild.name}. Now ${greeting()}`);
