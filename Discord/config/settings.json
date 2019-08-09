@@ -1,0 +1,9 @@
+{
+    "prefix": "!", 
+    "greetings": "true",
+    "modules": {
+        "music": "true",
+        "coinflip": "true"
+    }
+    
+}
