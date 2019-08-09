@@ -2,7 +2,7 @@ require('dotenv').config() // Allows you to use local .env to test bot
 const path = require('path');
 const Commando = require('discord.js-commando');
 const coinflip = require('./coinflip');
-const rolldice = require('./rolldice');
+const rolldice = require('./commands/fun/rolldice');
 const YTDL = require('ytdl-core');
 const settings = require('./config/settings.json');
 const musicStorage = require('./musicStorage');
