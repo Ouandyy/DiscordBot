@@ -10,7 +10,8 @@ const greeting = require('./greeting.js')
 
 // Commando is a framework of discord.js to allow for easeir command manipulation
 const client = global.client = new Commando.Client({
-  commandPrefix: settings.prefix
+  commandPrefix: settings.prefix,
+  unknownCommandResponse: false
 });
 
 tokentest = process.env.DISCORD_API
@@ -30,15 +31,39 @@ client.registry
     ['music','Music'],
     ['fun','Fun']
   ])
-  .registerCommandsIn(path.join(__dirname,'commands'))
+  .registerCommandsIn(path.join(__dirname,'commands'));
 
-  // Add Inhibitor: Allows the dispersion of commands in registry.
-  client.dispatcher.addInhibitor(msg => {
-    if (msg.channel.channel.type !== 'text') {
-      msg.reply('Please place command in text channel')
-        .then(() => console.log(`Sent a reply to ${msg.author.username}`))
-    }
-  })
+// Add Inhibitor: Allows the dispersion of commands in registry.
+client.dispatcher.addInhibitor(msg => {
+  if (msg.channel.type !== 'text') {
+    msg.reply('Please run command in a server where the bot has joined.')
+      .then(() => console.log(`Sent a reply to ${msg.author.username}`))
+  }
+
+  const prefix = '!';
+  const args = msg.content.split(' ').slice(1);
+  const command = msg.content.split(' ')[0].slice(prefix.length)
+
+  let cmd;
+  let botCommandExist = false;
+
+  if (client.registry.commands.has(command)) {
+    botCommandExist = true;
+    cmd = client.registry.commands.get(command)
+    console.log(cmd)
+    console.log(`This command exists: ${command}`)
+  }
+  else{
+    console.log(`This command doesn't exists: ${command}`)
+  }
+});
+
+/* Use this to test bot variables
+// Find servers that the bot is in
+console.log(client.guilds.array());
+// Find commands in registry
+console.log(client.registry.commands)
+*/
 
 
 
