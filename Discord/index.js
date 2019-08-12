@@ -29,7 +29,8 @@ client.registry
   .registerGroups([
     ['administration','Administration'],
     ['music','Music'],
-    ['fun','Fun']
+    ['fun','Fun'],
+    ['moderation','Moderation']
   ])
   .registerCommandsIn(path.join(__dirname,'commands'));
 
