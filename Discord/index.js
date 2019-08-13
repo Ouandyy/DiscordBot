@@ -1,11 +1,9 @@
 require('dotenv').config() // Allows you to use local .env to test bot
 const path = require('path');
 const Commando = require('discord.js-commando');
-const coinflip = require('./coinflip');
+const coinflip = require('./commands/fun/coinflip');
 const rolldice = require('./commands/fun/rolldice');
-const YTDL = require('ytdl-core');
 const settings = require('./config/settings.json');
-const musicStorage = require('./musicStorage');
 const greeting = require('./greeting.js')
 
 // Commando is a framework of discord.js to allow for easeir command manipulation
@@ -50,7 +48,7 @@ client.dispatcher.addInhibitor(msg => {
   if (client.registry.commands.has(command)) {
     botCommandExist = true;
     cmd = client.registry.commands.get(command)
-    console.log(cmd)
+    // console.log(cmd)
     console.log(`This command exists: ${command}`)
   }
   else{
@@ -118,33 +116,6 @@ client.on('message', msg => {
 });
 
 
-
-
-client.on('message', msg => {
-  if (msg.content === '!!flipcoin') {
-    msg.channel.send(coinflip());
-  }
-});
-
-client.on('message', msg => {
-  if (msg.content === '!!rolldice') {
-    msg.channel.send(rolldice());
-  }
-});
-
-// bot.on('message', msg => {
-//   const user = msg.member.user.username
-//   if (user === 'SQUINTZ') {
-//     msg.channel.send('stfu Jordan')
-//   } else if (user === 'Bl4ckB4ron') {
-//     msg.channel.send('stfu Andy')
-//   } else if (user === 'Virus') {
-//     msg.channel.send('stfu Jimmy')
-//   }
-// });
-
-
-// Welcome greetings
 client.on('guildMemberAdd', member => {
   const channel = member.guild.channels.find(ch => ch.name === 'welcome');
   if (!channel) return;
@@ -152,10 +123,3 @@ client.on('guildMemberAdd', member => {
 });
 
 
-
-// bot login for heroku
-// bot.login(process.env.DISCORD_API)
-
-// uncomment for local build and test
-// const discordToken = require('./config/discordToken.js');
-// bot.login(discordToken); 
