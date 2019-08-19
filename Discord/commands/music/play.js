@@ -17,23 +17,19 @@ module.exports = class playCommand extends Commando.Command {
     if (!msg.member.voiceChannel) {
       return msg.say('You are not in voice channel')
     }else {
+      const musicReq = msg.argString.slice(1);
+
       if (musicQue.playList.length > 0) {
         return (
-          musicQue.recorder(msg.argString.slice(1)),
-          msg.say('Test:has been added to your queue')
+          musicQue.recorder(musicReq),
+          msg.say(musicReq + ' has been added to your queue.')
         )
       }else {
         return (
-          musicQue.recorder(msg.argString.slice(1)),
-          msg.say('Now Playing: test')
+          musicQue.recorder(musicReq),
+          msg.say('Now Playing: ' + musicReq)
         )
       }
-    
-    
-      //   return (
-      // musicQue.recorder(msg.argString.slice(1)),
-    //   msg.say('Now Playing: test')
-    // )
     }
 
     
