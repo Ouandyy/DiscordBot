@@ -1,5 +1,6 @@
 const Commando = require('discord.js-commando');
-const musicQue = require('./musicStorage')
+const musicQue = require('./musicStorage');
+const play = require('./youtubeplayer');
 
 module.exports = class playCommand extends Commando.Command {
   constructor(client) {
@@ -18,7 +19,7 @@ module.exports = class playCommand extends Commando.Command {
       return msg.say('You are not in voice channel')
     }else {
       const musicReq = msg.argString.slice(1);
-
+      msg.member.voiceChannel.join();
       if (musicQue.playList.length > 0) {
         return (
           musicQue.recorder(musicReq),

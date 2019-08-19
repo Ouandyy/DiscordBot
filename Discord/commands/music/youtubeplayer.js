@@ -1,5 +1,3 @@
-const Commando = require('discord.js-commando');
-
 const enterAndPlay = () => {
   const { voiceChannel } = message.member;
 
@@ -12,4 +10,4 @@ const enterAndPlay = () => {
     })
 }
 
-module.exports = enterAndPlay;
+// module.exports = enterAndPlay
