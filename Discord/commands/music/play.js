@@ -1,6 +1,6 @@
 const Commando = require('discord.js-commando');
 const musicQue = require('./musicStorage');
-const play = require('./youtubeplayer');
+const ytdl = require('ytdl-core')
 
 module.exports = class playCommand extends Commando.Command {
   constructor(client) {
@@ -19,7 +19,6 @@ module.exports = class playCommand extends Commando.Command {
       return msg.say('You are not in voice channel')
     }else {
       const musicReq = msg.argString.slice(1);
-      msg.member.voiceChannel.join();
       if (musicQue.playList.length > 0) {
         return (
           musicQue.recorder(musicReq),
@@ -28,11 +27,15 @@ module.exports = class playCommand extends Commando.Command {
       }else {
         return (
           musicQue.recorder(musicReq),
-          msg.say('Now Playing: ' + musicReq)
+          msg.say('Now Playing: ' + musicReq),
+          msg.member.voiceChannel.join()
+            .then(connection => {
+              const stream = ytdl('https://www.youtube.com/watch?v=BQqEMLOOMCo', { filter: 'audioonly' });
+              const dispatcher = connection.playStream(stream);
+              dispatcher.on('end', () => voiceChannel.leave());
+            })
         )
       }
     }
-
-    
   }
 };
