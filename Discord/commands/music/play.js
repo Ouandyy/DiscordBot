@@ -32,7 +32,7 @@ module.exports = class playCommand extends Commando.Command {
             .then(connection => {
               const stream = ytdl('https://www.youtube.com/watch?v=BQqEMLOOMCo', { filter: 'audioonly' });
               const dispatcher = connection.playStream(stream);
-              dispatcher.on('end', () => voiceChannel.leave());
+              dispatcher.on('end', () => msg.member.voiceChannel.leave());
             })
         )
       }
