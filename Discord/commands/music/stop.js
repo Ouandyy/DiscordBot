@@ -1,4 +1,5 @@
 const Commando = require ('discord.js-commando');
+const musicQue = require('./musicStorage');
 
 module.exports = class playCommand extends Commando.Command {
   constructor(client) {
@@ -12,7 +13,11 @@ module.exports = class playCommand extends Commando.Command {
     });
   }
 
-  run(){
-    return
+  run(msg){
+    return (
+      msg.member.voiceChannel.leave(),
+      musicQue.playList = [],
+      console.log(musicQue.playList)
+    )
   }
 }
