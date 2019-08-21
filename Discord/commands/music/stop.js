@@ -13,11 +13,11 @@ module.exports = class playCommand extends Commando.Command {
     });
   }
 
+
   run(msg){
     return (
       msg.member.voiceChannel.leave(),
-      musicQue.playList = [],
-      console.log(musicQue.playList)
+      musicQue.playList = []
     )
   }
 }
