@@ -4,7 +4,7 @@ const Commando = require('discord.js-commando');
 const coinflip = require('./commands/fun/coinflip');
 const rolldice = require('./commands/fun/rolldice');
 const settings = require('./config/settings.json');
-const greeting = require('./greeting.js')
+const greeting = require('./greeting.js');
 
 // Commando is a framework of discord.js to allow for easeir command manipulation
 const client = global.client = new Commando.Client({
@@ -64,56 +64,6 @@ console.log(client.registry.commands)
 */
 
 
-
-
-const play = (connection, message) => {
-  
-
-   connection.playStream(YTDL(musicStorage.playList[0], {filter: 'audioonly'}));
-  
-   musicStorage.playList.shift();
-  
-    // if (musicStorage[0]) {
-    //   play(connection, musicStorage[0])
-    // }
-    // else {
-    //   connection.disconnect();
-    // }
-
-}
-
-
-client.on('message', msg => {
-  if (msg.content.slice(0, 6) === '!!play') {
-    const musicInput = msg.content.split(' ')[1];
-    const voiceChannel = msg.member.voiceChannel;
-    if (!voiceChannel) {
-      return msg.channel.send('Youre not in channel')
-    };
-    
-    if(!musicInput) {
-      return msg.channel.send('No input is provided')
-    };
-
-    
-    
-    musicStorage.recorder(musicInput);
-    msg.channel.send(`${musicStorage.playList[0]} has been added`);
-    
-    
-    
-    if (!msg.guild.voiceConnection) {
-      msg.member.voiceChannel.join()
-      .then((connection) => {
-        play(connection, musicStorage.playList[0])
-      })
-      .catch((err) => {console.error("error at voice connection", err)})
-    }
-    
-    
-    
-  }
-});
 
 
 client.on('guildMemberAdd', member => {

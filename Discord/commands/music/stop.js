@@ -16,8 +16,7 @@ module.exports = class playCommand extends Commando.Command {
 
   run(msg){
     return (
-      msg.member.voiceChannel.leave(),
-      musicQue.playList = []
+      msg.member.voiceChannel.leave()
     )
   }
 }

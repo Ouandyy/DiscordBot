@@ -1,6 +1,7 @@
 const Commando = require('discord.js-commando');
 const musicQue = require('./musicStorage');
-const ytdl = require('ytdl-core')
+const ytdl = require('ytdl-core');
+const ytSearch = require('../../config/youtubeSearch')
 
 module.exports = class playCommand extends Commando.Command {
   constructor(client) {
@@ -12,7 +13,30 @@ module.exports = class playCommand extends Commando.Command {
       clientPermissions: ['SEND_MESSAGES', 'CONNECT', 'SPEAK'],
       description: 'Command to play music in the users voice channel'
     });
+    this.youtubePlayer = this.youtubePlayer.bind(this)
   }
+//recursion to checkplay list
+  youtubePlayer (msg) {
+    msg.member.voiceChannel.join()
+      .then(connection => {
+        ytSearch(musicQue.playList[0])
+        .then((data) => {
+          const stream = ytdl(data, { filter: 'audioonly' });
+          const dispatcher = connection.playStream(stream);
+          dispatcher.on('end', () => {
+            if (musicQue.playList[1]) {
+              musicQue.playList.shift();
+              msg.say('Now playing ' + musicQue.playList[0])
+              this.youtubePlayer(msg)
+            } else {
+              msg.member.voiceChannel.leave(),
+                musicQue.playList.shift()
+            }
+          })
+        })
+      })
+  }
+
 
   run(msg) {
     if (!msg.member.voiceChannel) {
@@ -28,12 +52,7 @@ module.exports = class playCommand extends Commando.Command {
         return (
           musicQue.recorder(musicReq),
           msg.say('Now Playing: ' + musicReq),
-          msg.member.voiceChannel.join()
-            .then(connection => {
-              const stream = ytdl('https://www.youtube.com/watch?v=BQqEMLOOMCo', { filter: 'audioonly' });
-              const dispatcher = connection.playStream(stream);
-              dispatcher.on('end', () => msg.member.voiceChannel.leave());
-            })
+          this.youtubePlayer(msg)
         )
       }
     }
