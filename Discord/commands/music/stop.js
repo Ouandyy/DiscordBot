@@ -1,7 +1,7 @@
 const Commando = require('discord.js-commando');
 const musicQue = require('./musicStorage');
 
-module.exports = class playCommand extends Commando.Command {
+module.exports = class stopCommand extends Commando.Command {
   constructor(client) {
     super(client, {
       name: 'stop',

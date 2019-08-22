@@ -15,7 +15,7 @@ const youtubeSearch = (input) => {
 }
 
 module.exports = youtubeSearch
-
+//example
 // youtubeSearch('kendrick')
 //   .then((data) => {console.log(data)})
 //   .catch(console.error)
