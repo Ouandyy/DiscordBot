@@ -2,6 +2,7 @@ const Commando = require('discord.js-commando');
 const musicQue = require('./musicStorage');
 const ytdl = require('ytdl-core');
 const ytSearch = require('../../config/youtubeSearch');
+const ytName = require('../../config/youtubeName');
 
 module.exports = class playCommand extends Commando.Command {
   constructor(client) {
@@ -45,14 +46,22 @@ module.exports = class playCommand extends Commando.Command {
       const musicReq = msg.argString.slice(1);
       if (musicQue.playList.length > 0) {
         return (
-          musicQue.recorder(musicReq),
-          msg.say(musicReq + ' has been added to your queue.')
+          ytName(musicReq)
+            .then((data) => {
+              musicQue.recorder(data),
+              msg.say(data + ' has been added to your queue.')
+            })
+            .catch((err) => {console.error(err)})
         )
       }else {
         return (
-          musicQue.recorder(musicReq),
-          msg.say('Now Playing: ' + musicReq),
-          this.youtubePlayer(msg)
+          ytName(musicReq)
+            .then((data) => {
+              musicQue.recorder(data),
+              msg.say('Now Playing: ' + data),
+              this.youtubePlayer(msg)
+            })
+            .catch((err) => {console.error(err)})
         )
       }
     }
