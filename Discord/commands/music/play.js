@@ -21,7 +21,7 @@ module.exports = class playCommand extends Commando.Command {
       .then(connection => {
         ytSearch(musicQue.playList[0])
         .then((data) => {
-          const stream = ytdl(data, { filter: 'audioonly' });
+          const stream = ytdl(data.link, { filter: 'audioonly' });
           const dispatcher = connection.playStream(stream);
           dispatcher.on('end', () => {
             if (musicQue.playList[1]) {

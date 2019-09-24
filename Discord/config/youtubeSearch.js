@@ -9,7 +9,7 @@ const youtubeSearch = (input) => {
   return new Promise((res) => {
     search(input, opts, (err, results) => {
       if (err) console.log(err);
-      res(results[0].link);
+      res(results[0]);
     });
   })
 }
